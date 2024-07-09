@@ -9,8 +9,15 @@ public class Animation_Controller : MonoBehaviour
    
     [SerializeField] private GameObject MainPopUp;
 
-    [Header("ImageAnimation")]
+    [Header("lampAnimation")]
     [SerializeField] internal ImageAnimation lampAnimation;
+    [SerializeField] private List<Sprite> lampAnimSprites;
+    [SerializeField] private List<Sprite> lampWithGlowSprites;
+
+    [Header("3 lamp with glow")]
+    [SerializeField] internal ImageAnimation ThreelampAnimation;
+    [SerializeField] private List<Sprite> ThreelampSprites;
+    [SerializeField] private List<Sprite> ThreelampWithGlowSprites;
 
     [Header("Sound Animation")]
     [SerializeField] private GameObject SoundPopup;
@@ -30,10 +37,12 @@ public class Animation_Controller : MonoBehaviour
     [SerializeField] private ImageAnimation TigerBanner;
     [SerializeField] private ImageAnimation TigerAppearEffect;
     [SerializeField] private TMP_Text TigerBannerText;
+
+
     void Start()
     {
 
-        PlaySoundPopUpOpenAnim();
+        //PlaySoundPopUpOpenAnim();
         //Base.DOScale(Vector3.one,0.5f).SetLoops(-1);
     }
 
@@ -70,12 +79,27 @@ public class Animation_Controller : MonoBehaviour
     void PlayTigerSpinAnimation() {
 
         TigerSpinAnim.StartAnimation();
+    }
+
+    internal void PLayThreeLampWIthGlowAnim() {
+
+        ThreelampAnimation.StopAnimation();
+        ThreelampAnimation.textureArray = ThreelampWithGlowSprites;
+        ThreelampAnimation.rendererDelegate.sprite = ThreelampWithGlowSprites[0];
+        ThreelampAnimation.StartAnimation();
 
 
     }
 
+    internal void ResetThreeLampAnimation()
+    {
+        ThreelampAnimation.StopAnimation();
+        ThreelampAnimation.textureArray = ThreelampSprites;
+        ThreelampAnimation.rendererDelegate.sprite = ThreelampSprites[0];
+        ThreelampAnimation.StartAnimation();
+    }
 
-    internal IEnumerator TigerBannerAnim(int value, Button playbutton) {
+    internal IEnumerator PlayTigerBannerAnim(int value, Button playbutton) {
         playbutton.gameObject.SetActive(false);
         TigerBanner.gameObject.SetActive(true);
         TigerBannerText.text = value.ToString();
@@ -89,16 +113,43 @@ public class Animation_Controller : MonoBehaviour
         yield return new WaitForSeconds(1.65f);
         TigerBannerText.DOFade(1, 0.2f);
         TigerBannerText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(2.2f);
+        //yield return new WaitForSeconds(2.2f);
+  
+
+
+    }
+
+    internal void PlaylampAnim() {
+
+        lampAnimation.StopAnimation();
+        lampAnimation.textureArray = lampAnimSprites;
+        lampAnimation.rendererDelegate.sprite = lampAnimSprites[0];
+        lampAnimation.StartAnimation();
+
+    }
+
+    internal void StoplampAnim() {
+
+        lampAnimation.StopAnimation();
+    }
+
+    internal void PlayLmapGlowAnim() {
+
+        lampAnimation.StopAnimation();
+        lampAnimation.textureArray = lampWithGlowSprites;
+        lampAnimation.rendererDelegate.sprite = lampWithGlowSprites[0];
+        lampAnimation.StartAnimation();
+
+    }
+
+    internal IEnumerator PlayTigerbannerAnimOff(Button playbutton) {
         TigerBannerText.DOFade(0, 0.2f);
         TigerAppearEffect.StartAnimation();
         yield return new WaitForSeconds(0.7f);
-        TigerBanner.GetComponent<Image>().DOFade(0, 0.5f);
-        yield return new WaitForSeconds(0.3f);
+        TigerBanner.GetComponent<Image>().DOFade(0, 0.7f);
+        yield return new WaitForSeconds(0.7f);
         playbutton.gameObject.SetActive(true);
         TigerBanner.gameObject.SetActive(false);
-
-
     }
 
     IEnumerator appear(ImageAnimation appearAnim, ImageAnimation characterAnim, float delay=0)

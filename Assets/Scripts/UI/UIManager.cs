@@ -9,18 +9,12 @@ using DG.Tweening;
 public class UIManager : MonoBehaviour
 {
     [Header("Buttons")]
-    [SerializeField]
-    private Button Quickpick_button;
-    [SerializeField]
-    private Button Play_Button;
-    [SerializeField]
-    private Button AutoPlay_Button;
-    [SerializeField]
-    private Button Reset_Button;
-    [SerializeField]
-    private Button Delete_Button;
-    [SerializeField]
-    private Button GameExit_Button;
+    [SerializeField] private Button Quickpick_button;
+    [SerializeField] private Button Play_Button;
+    [SerializeField] private Button AutoPlay_Button;
+    [SerializeField] private Button Reset_Button;
+    [SerializeField] private Button Delete_Button;
+    [SerializeField] private Button GameExit_Button;
     [SerializeField] private Button MaxPopup_Button;
     [SerializeField] private Button selectionPlus_Button;
     [SerializeField] private Button selectionMinus_Button;
@@ -35,6 +29,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button Sound_off_Button;
     [SerializeField] private Button Info_Button;
     [SerializeField] private Button Info_exitButton;
+    [SerializeField] private Button Speed_button;
 
     [Header("Texts")]
     [SerializeField] private TMP_Text Stake_Text;
@@ -71,6 +66,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject StakeList;
     [SerializeField] private GameObject StakeOption_prefab;
     [SerializeField] private GameObject Main_PopUp;
+    [SerializeField] private GameObject SpeedOn;
+    [SerializeField] private GameObject SpeedOff;
 
     [Header("Scripts")]
     [SerializeField]
@@ -95,6 +92,8 @@ public class UIManager : MonoBehaviour
     [Header("sprites")]
     [SerializeField] private Sprite Payout_win_sprite;
     [SerializeField] private Sprite Payout_original_sprite;
+    [SerializeField] private Sprite SpeedOnSprite;
+    [SerializeField] private Sprite SpeedOffSprite;
 
     [Header("Image Animation Script")]
     [SerializeField]
@@ -107,6 +106,8 @@ public class UIManager : MonoBehaviour
     internal bool isReset = false;
 
     private int index;
+
+    private bool isSpeedOn = false;
 
     [Header("Strings")]
     [SerializeField] private string maxCountString = "A maximum of 10 picks is allowed per play";
@@ -194,6 +195,13 @@ public class UIManager : MonoBehaviour
             Info_exitButton.onClick.AddListener(delegate { ClosePopUp(Info_PopUp); });
         }
 
+        if (Speed_button) {
+
+
+            Speed_button.onClick.RemoveAllListeners();
+            Speed_button.onClick.AddListener(ToggleSpeed);
+        }
+
         if (Play_Button) Play_Button.onClick.RemoveAllListeners();
         if (Play_Button) Play_Button.onClick.AddListener(DummyPlay);
 
@@ -257,6 +265,27 @@ public class UIManager : MonoBehaviour
             if (StarAnim_Object) StarAnim_Object.SetActive(false);
         });
     }
+
+    void ToggleSpeed() {
+
+        isSpeedOn = !isSpeedOn;
+        if (isSpeedOn)
+        {
+
+            Speed_button.image.sprite = SpeedOnSprite;
+            SpeedOn.SetActive(true);
+            SpeedOff.SetActive(false);
+
+        }
+        else {
+
+            Speed_button.image.sprite = SpeedOffSprite;
+            SpeedOn.SetActive(false);
+            SpeedOff.SetActive(true);
+        }
+
+    }
+
 
     void ToggleSelection(bool inc)
     {
@@ -351,7 +380,7 @@ public class UIManager : MonoBehaviour
         }
 
         if (index < stakeOptions.Count || index >= 0)
-            StakeList.transform.DOLocalMoveY(StakeList.transform.localPosition.y + 63 * dir, 0.2f);
+            StakeList.transform.DOLocalMoveY(StakeList.transform.localPosition.y + (63 * dir), 0.2f);
 
         StakeMenuText.text = stakeOptions[index].ToString();
     }
