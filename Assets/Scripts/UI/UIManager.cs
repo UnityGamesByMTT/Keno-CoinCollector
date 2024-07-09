@@ -208,10 +208,10 @@ public class UIManager : MonoBehaviour
         CheckPlayButton(false);
 
         if (StakePlus_Button) StakePlus_Button.onClick.RemoveAllListeners();
-        if (StakePlus_Button) StakePlus_Button.onClick.AddListener(delegate { ChangeStake(true); });
+        if (StakePlus_Button) StakePlus_Button.onClick.AddListener(delegate { ChangeStake(false); });
 
         if (StakeMinus_Button) StakeMinus_Button.onClick.RemoveAllListeners();
-        if (StakeMinus_Button) StakeMinus_Button.onClick.AddListener(delegate { ChangeStake(false); });
+        if (StakeMinus_Button) StakeMinus_Button.onClick.AddListener(delegate { ChangeStake(true); });
 
         if (Reset_Button) Reset_Button.onClick.RemoveAllListeners();
         if (Reset_Button) Reset_Button.onClick.AddListener(ResetGame);
@@ -275,6 +275,7 @@ public class UIManager : MonoBehaviour
             Speed_button.image.sprite = SpeedOnSprite;
             SpeedOn.SetActive(true);
             SpeedOff.SetActive(false);
+            KenoManager.speed = 0;
 
         }
         else {
@@ -282,6 +283,8 @@ public class UIManager : MonoBehaviour
             Speed_button.image.sprite = SpeedOffSprite;
             SpeedOn.SetActive(false);
             SpeedOff.SetActive(true);
+            KenoManager.speed = 0.1f;
+
         }
 
     }
@@ -566,7 +569,7 @@ public class UIManager : MonoBehaviour
         CheckPlayButton(true);
     }
 
-    private void ResetGame()
+    internal void ResetGame()
     {
         //KenoManager.ResetWinAnim();
         //if (TitleAnim) TitleAnim.StopAnimation();

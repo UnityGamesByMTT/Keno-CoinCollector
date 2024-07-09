@@ -127,6 +127,7 @@ public class KenoButton : MonoBehaviour
 
             if (selected_image) selected_image.sprite = slelected_sprite;
             selected_image.gameObject.SetActive(false);
+            This_Image.sprite = original_sprite;
         }
 
     }
@@ -175,12 +176,21 @@ public class KenoButton : MonoBehaviour
         }
     }
 
-    internal void ResetButton()
+    internal void ResetButton(bool isFreeSpin=false)
     {
         isActive = false;
 
-        if (This_Image) This_Image.sprite = original_sprite;
-        if (This_Text) This_Text.color = KenoManager.textColor;
+        if (!isFreeSpin)
+        {
+
+            if (This_Image) This_Image.sprite = original_sprite;
+            if (This_Text) This_Text.color = KenoManager.textColor;
+        }
+        else {
+            if (This_Image) This_Image.sprite = FreeSpinSprite;
+            if (This_Text) This_Text.color =Color.white;
+
+        }
         //This_Button.interactable = false;
         selected_image.gameObject.SetActive(false);
         Ball_image.gameObject.SetActive(false);

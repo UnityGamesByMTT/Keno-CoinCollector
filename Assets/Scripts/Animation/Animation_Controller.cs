@@ -42,7 +42,7 @@ public class Animation_Controller : MonoBehaviour
     void Start()
     {
 
-        //PlaySoundPopUpOpenAnim();
+        PlaySoundPopUpOpenAnim();
         //Base.DOScale(Vector3.one,0.5f).SetLoops(-1);
     }
 

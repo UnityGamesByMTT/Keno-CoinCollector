@@ -71,6 +71,8 @@ public class KenoBehaviour : MonoBehaviour
     [SerializeField] private bool FreeGame;
     [SerializeField] private int FreeGameCount;
 
+    internal float speed = 0.1f;
+
     internal void PickRandoms()
     {
         SelectedList.Clear();
@@ -224,7 +226,7 @@ public class KenoBehaviour : MonoBehaviour
         StartCoroutine(PlayGameRoutine());
     }
 
-    private IEnumerator PlayGameRoutine(bool isFreeGame=false)
+    private IEnumerator PlayGameRoutine()
     {
         uiManager.UpdateBalance();
         uiManager.ResetPaytable();
@@ -241,6 +243,8 @@ public class KenoBehaviour : MonoBehaviour
         }
 
         ResetBalls();
+        if (FreeGame) ResetButtons(true);
+        else ResetButtons(false);
 
         if (!FreeGame) {
             for (int i = 0; i < FortuneList.Count; i++)
@@ -302,7 +306,8 @@ public class KenoBehaviour : MonoBehaviour
         uiManager.CheckFinalWinning(winArray, 20);
         uiManager.UpdateBalance(20);
         yield return new WaitForSeconds(0.5f);
-        if (!FreeGame) {
+        if (!FreeGame)
+        {
 
             FreeGameCount = FortuenWinArray.Count;
             if (FortuenWinArray.Count > 0)
@@ -320,19 +325,22 @@ public class KenoBehaviour : MonoBehaviour
             uiManager.EnableReset();
             if (DisableScreen_object) DisableScreen_object.SetActive(false);
         }
+            
 
 
-        //for (int i = 0; i < ResultList.Count; i++)
-        //{
-        //    for (int j = 0; j < FortuneList.Count; j++)
-        //    {
-        //        if (FortuneList[j] == ResultList[i])
-        //            ForturnWinArray.Add(ResultList[i]);
-        //    }
-        //}
 
 
-    }
+            //for (int i = 0; i < ResultList.Count; i++)
+            //{
+            //    for (int j = 0; j < FortuneList.Count; j++)
+            //    {
+            //        if (FortuneList[j] == ResultList[i])
+            //            ForturnWinArray.Add(ResultList[i]);
+            //    }
+            //}
+
+
+        }
 
     IEnumerator AnimationForBalls(Transform balls, TMP_Text ball_text, int index, List<int> FortuneList)
     {
@@ -358,14 +366,14 @@ public class KenoBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         ball_text.text = ResultList[index].ToString();
-        balls.DOScale(2.5f, 0.15f);
-        balls.DOLocalMoveY(-180, 0.15f);
-        yield return new WaitForSeconds(0.15f);
+        balls.DOScale(2.5f, 0.15f+speed);
+        balls.DOLocalMoveY(-150, 0.15f+speed);
+        yield return new WaitForSeconds(0.15f+speed);
         balls.DOScale(1, 1f);
         if(tempButton)
-        balls.DOLocalMove(tempButton.transform.localPosition, 0.3f);
+        balls.DOLocalMove(tempButton.transform.localPosition, 0.3f+speed);
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.3f+speed);
         balls.gameObject.SetActive(false);
         balls.SetParent(lamp_transform);
         balls.localPosition = new Vector3(0, 0, 0);
@@ -400,11 +408,11 @@ public class KenoBehaviour : MonoBehaviour
         uiManager.CheckWinnings(ResultCounter);
     }
 
-    internal void ResetButtons()
+    internal void ResetButtons(bool isFreeSPin=false)
     {
         for (int i = 0; i < KenoButtonScripts.Count; i++)
         {
-            KenoButtonScripts[i].ResetButton();
+            KenoButtonScripts[i].ResetButton(isFreeSPin);
         }
 
 
