@@ -71,16 +71,16 @@ MonoBehaviour:
   _playPongButtonFontSize: 13px
   _watchVideoButtonYoutubeLink: https://www.youtube.com/watch?v=FIpZ1h7LEos
   _disableMobileWarning: 1
-  _targetPath: /Users/gamedev1/Builds/coinCollector2
+  _targetPath: /Users/gamedev1/Builds/coinCollector5
   _s11: "\n    &&& title2019start &&&<title>%UNITY_WEB_NAME%</title>&&& title2019end
     &&&\n    &&& title2020start &&&<title>Coin Collector</title>&&& title2020end
     &&&\n    &&& UnityLoader1 &&& <script src=\"%UNITY_WEBGL_LOADER_URL%\"></script>
     &&& UnityLoader2 &&&\n    "
   _s21: "\n            applicationInstance = UnityLoader.instantiate(\"gameContainer\",
     \"%UNITY_WEBGL_BUILD_URL%\", {onProgress: UnityProgress});\n            "
-  _s31: "\n    var buildUrl = \"Build\";\n    var loaderUrl = buildUrl + \"/coinCollector2.loader.js\";\n   
-    var config = {\n        dataUrl: buildUrl + \"/coinCollector2.data.unityweb\",\n       
-    frameworkUrl: buildUrl + \"/coinCollector2.framework.js.unityweb\",\n       
-    codeUrl: buildUrl + \"/coinCollector2.wasm.unityweb\",\n        streamingAssetsUrl:
+  _s31: "\n    var buildUrl = \"Build\";\n    var loaderUrl = buildUrl + \"/coinCollector5.loader.js\";\n   
+    var config = {\n        dataUrl: buildUrl + \"/coinCollector5.data.unityweb\",\n       
+    frameworkUrl: buildUrl + \"/coinCollector5.framework.js.unityweb\",\n       
+    codeUrl: buildUrl + \"/coinCollector5.wasm.unityweb\",\n        streamingAssetsUrl:
     \"StreamingAssets\",\n        companyName: \"DefaultCompany\",\n        productName:
     \"Coin Collector\",\n        productVersion: \"1.0\",\n    };\n"
