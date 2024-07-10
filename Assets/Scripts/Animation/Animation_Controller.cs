@@ -99,25 +99,7 @@ public class Animation_Controller : MonoBehaviour
         ThreelampAnimation.StartAnimation();
     }
 
-    internal IEnumerator PlayTigerBannerAnim(int value, Button playbutton) {
-        playbutton.gameObject.SetActive(false);
-        TigerBanner.gameObject.SetActive(true);
-        TigerBannerText.text = value.ToString();
 
-        TigerAppearEffect.StartAnimation();
-        yield return new WaitForSeconds(0.7f);
-        TigerBanner.GetComponent<Image>().DOFade(1, 0.2f);
-        yield return new WaitForSeconds(1f);
-        TigerBanner.StartAnimation();
-        TigerAppearEffect.StopAnimation();
-        yield return new WaitForSeconds(1.65f);
-        TigerBannerText.DOFade(1, 0.2f);
-        TigerBannerText.gameObject.SetActive(true);
-        //yield return new WaitForSeconds(2.2f);
-  
-
-
-    }
 
     internal void PlaylampAnim() {
 
@@ -142,12 +124,33 @@ public class Animation_Controller : MonoBehaviour
 
     }
 
+    internal IEnumerator PlayTigerBannerAnim(int value, Button playbutton)
+    {
+        playbutton.gameObject.SetActive(false);
+        TigerBanner.gameObject.SetActive(true);
+        TigerBannerText.text = value.ToString();
+
+        TigerAppearEffect.StartAnimation();
+        yield return new WaitForSeconds(0.35f);
+        TigerBanner.GetComponent<Image>().DOFade(1, 0.2f);
+        yield return new WaitForSeconds(1f);
+        TigerBanner.StartAnimation();
+        TigerAppearEffect.StopAnimation();
+        yield return new WaitForSeconds(1.65f);
+        TigerBannerText.DOFade(1, 0.2f);
+        TigerBannerText.gameObject.SetActive(true);
+        //yield return new WaitForSeconds(2.2f);
+
+
+
+    }
+
     internal IEnumerator PlayTigerbannerAnimOff(Button playbutton) {
         TigerBannerText.DOFade(0, 0.2f);
         TigerAppearEffect.StartAnimation();
-        yield return new WaitForSeconds(0.7f);
-        TigerBanner.GetComponent<Image>().DOFade(0, 0.7f);
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.35f);
+        TigerBanner.GetComponent<Image>().DOFade(0, 0.35f);
+        yield return new WaitForSeconds(0.35f);
         playbutton.gameObject.SetActive(true);
         TigerBanner.gameObject.SetActive(false);
     }
@@ -156,14 +159,14 @@ public class Animation_Controller : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         appearAnim.StartAnimation();
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.35f);
         characterAnim.GetComponent<Image>().DOFade(1, 0.1f);
         yield return new WaitForSeconds(1f);
         characterAnim.StartAnimation();
         appearAnim.StopAnimation();
         yield return new WaitForSeconds(1.2f);
         appearAnim.StartAnimation();
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.35f);
         characterAnim.GetComponent<Image>().DOFade(0, 0.5f);
         if (delay == 0.3f)
         {
